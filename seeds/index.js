@@ -10,7 +10,7 @@ const seedAll = async () => {
 
   await seedPosts();
 
-  // await seedComments();
+  await seedComments();
 
   process.exit(0);
 };

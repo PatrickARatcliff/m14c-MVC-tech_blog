@@ -1,21 +1,28 @@
 <div class="row">
-    <div class="col-12">
-        <div class="accordion" id="accordionExample">
-            {{#each userPosts as |data|}}
+    <div class="col-auto">
+        <h2>Welcome, {{user.name}}!</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 post-list">
+        <div class="accordion " id="accordionExample">
+            {{#each posts as |post|}}
             <div class="card mt-4">
-                <div class="card-header" id="headingOne">
-                    <h2 class="mb-0">
+                <div class="card-header row" id="headingOne">
+                    <h2 class="mb-0 col-11">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
+                            {{post.content}}
                         </button>
                     </h2>
+                    <div class="col-1">
+                        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+                    </div>
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
                     <div class="card-body">
-                        Some placeholder content for the first accordion panel. This panel is shown by default, thanks
-                        to the <code>.show</code> class.
+                        {{post.user.name}} @ {{post.date_created}}
                     </div>
                     <div>
                         <a class="btn btn-primary mx-3 my-2" href="#" role="button">Make Comment</a>
@@ -29,12 +36,12 @@
                             </a>
                         </p>
                         <div class="collapse" id="collapseExample">
-                            {{#each comment as |commentData|}}
+                            {{#each comments as |comment|}}
                             <div class="col-12 mt-2">
                                 <div class="card" style="width: 18rem;">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            <p>{{username}}: {{content}}</p>
+                                            <p>{{comment.user_id}}: {{comment.content}}</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -48,7 +55,9 @@
             {{/each}}
         </div>
         <div class="row justify-content-center mt-4">
-            <a class="btn btn-primary" href="#" role="button">Create New Post</a>
+            <a class="btn btn-primary" href="/newPost" role="button">Create New Post</a>
         </div>
     </div>
 </div>
+
+<script src="./js/deletePost.js"></script>

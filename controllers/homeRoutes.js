@@ -4,12 +4,16 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        // get all posts and JOIN with user data
+        // get all posts and JOIN with user/Comment data
         const postData = await Post.findAll({
             include: [
                 {
                     model: User,
                     attributes: ['name'],
+                },
+                {
+                    model: Comment,
+                    attributes: ['user_id', 'content']
                 },
             ],
         });
@@ -45,7 +49,7 @@ router.get('/post/:id', async (req, res) => {
     }
 });
 // middleware to prevent access to route
-router.get('/profile', withAuth, async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
         // use session id to find user
         const userData = await User.findByPk(req.session.user_id, {
@@ -53,7 +57,7 @@ router.get('/profile', withAuth, async (req, res) => {
             include: [{ model: Post }],
         });
         const user = userData.get({ plain: true });
-        res.render('profile', {
+        res.render('homepage', {
             ...user,
             logged_in: true
         });
@@ -64,10 +68,18 @@ router.get('/profile', withAuth, async (req, res) => {
 router.get('/login', (req, res) => {
     // if user is logged in redirect to another route
     if (req.session.logged_in) {
-        res.redirect('/profile');
+        res.redirect('/');
         return;
     }
     res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+    if (req.session.logged_In) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
 });
 
 module.exports = router;
