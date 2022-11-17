@@ -1,7 +1,10 @@
+{{!-- {{#for users as |user|}} --}}
+{{#if logged_in}}
 <div class="row">
     <div class="col-auto">
-        <h2>Welcome, {{user.name}}!</h2>
+        <h4>Welcome!</h4>
     </div>
+{{/if}}
 </div>
 <div class="row">
     <div class="col-12 post-list">
@@ -15,9 +18,11 @@
                             {{post.content}}
                         </button>
                     </h2>
+                    {{!-- {{#if belongsToUser}} --}}
                     <div class="col-1">
                         <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
                     </div>
+                    {{!-- {{/if}} --}}
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
@@ -25,7 +30,7 @@
                         {{post.user.name}} @ {{post.date_created}}
                     </div>
                     <div>
-                        <a class="btn btn-primary mx-3 my-2" href="#" role="button">Make Comment</a>
+                        <a class="btn btn-primary mx-3 my-2" href="/" role="button">Make Comment</a>
                     </div>
                     {{#if comment}}
                     <div>

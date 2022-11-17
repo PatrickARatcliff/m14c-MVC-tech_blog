@@ -17,11 +17,14 @@ router.get('/', async (req, res) => {
                 },
             ],
         });
+        const userData = await User.findAll({});
         // serialize data so the template can read it
         const posts = postData.map((post) => post.get({ plain: true }));
+        const users = userData.map((user) => user.get({ plain: true }));
         // pass serialized data and session flag into template
         res.render('homepage', {
             posts,
+            users,
             logged_in: req.session.logged_in
         });
     } catch (err) {
