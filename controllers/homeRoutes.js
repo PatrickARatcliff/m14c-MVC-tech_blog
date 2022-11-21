@@ -118,4 +118,5 @@ router.get('/posts', (req, res) => {
     });
 });
 
+
 module.exports = router;

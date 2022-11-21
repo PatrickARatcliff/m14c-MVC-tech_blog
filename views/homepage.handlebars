@@ -4,7 +4,7 @@
     <div class="col-auto">
         <h4>Welcome!</h4>
     </div>
-{{/if}}
+    {{/if}}
 </div>
 <div class="row">
     <div class="col-12 post-list">
@@ -12,14 +12,14 @@
             {{#each posts as |post|}}
             <div class="card mt-4">
                 <div class="card-header row" id="headingOne">
-                    <h2 class="mb-0 col-11">
+                    <h2 class="mb-0 col-9">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             {{post.content}}
                         </button>
                     </h2>
                     {{!-- {{#if belongsToUser}} --}}
-                    <div class="col-1">
+                    <div class="col-2">
                         <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
                     </div>
                     {{!-- {{/if}} --}}
@@ -29,8 +29,25 @@
                     <div class="card-body">
                         {{post.user.name}}: {{format_date post.date_created}} @ {{format_time post.date_created}}
                     </div>
-                    <div>
-                        <a class="btn btn-primary mx-3 my-2" href="/" role="button">Make Comment</a>
+                    <div class="mb-5">
+                        <p>
+                            <a class="btn btn-primary mx-3 my-2" data-toggle="collapse" href="#collapseExample1"
+                                role="button" aria-expanded="false" aria-controls="collapseExample">Make Comment</a>
+                        </p>
+                        <div class="collapse mx-3" id="collapseExample1">
+                            <div class="row">
+                                <div class="col-12">
+                                    <form class="form new-comment-form">
+                                        <div class="form-group">
+                                            <label for="new-comment-text">Enter Comment Text</label>
+                                            <input type="text" class="form-control" id="new-post-text"
+                                                placeholder="blah, blah, blah...">
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">Submit Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     {{#if comments}}
                     <div>
@@ -47,7 +64,8 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
                                             <p>{{comment.content}}</p>
-                                            {{!-- <p> {{comment.user.name}}: {{ format_date comment.date_created}} @ {{ format_time comment.date_created}} </p> --}}
+                                            {{!-- <p> {{comment.user.name}}: {{ format_date comment.date_created}} @ {{
+                                                format_time comment.date_created}} </p> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -58,6 +76,7 @@
                     {{/if}}
                 </div>
             </div>
+            <p hidden id="post_id">{{post.id}}</p>
             {{/each}}
         </div>
         <div class="row justify-content-center mt-4">
@@ -67,5 +86,5 @@
 </div>
 
 <script src="./js/deletePost.js"></script>
-{{!-- <script src="./js/newPost.js"></script>
-<script src="./js/newComment.js"></script> --}}
+<script src="./js/newPost.js"></script>
+<script src="./js/newComment.js"></script>
