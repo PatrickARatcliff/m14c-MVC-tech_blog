@@ -17,18 +17,39 @@ router.get('/', async (req, res) => {
                 },
             ],
         });
-        const userData = await User.findAll({});
+
         // serialize data so the template can read it
         const posts = postData.map((post) => post.get({ plain: true }));
-        const users = userData.map((user) => user.get({ plain: true }));
+
+        const commentData = await Comment.findAll({
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
+
+        // serialize data so the template can read it
+        const comments = commentData.map((post) => post.get({ plain: true }));
+        
+        // const userData = await User.findOne({
+        //     where: {
+        //         _id: req.session.user_Id,
+        //       },
+        // });
+
+        // const user = await userData.map((user) => user.get({ plain: true }));
         // pass serialized data and session flag into template
         res.render('homepage', {
             posts,
-            users,
-            logged_in: req.session.logged_in
+            comments,
+            // user,
+            logged_in: req.session.logged_in,
+            userId: req.session.user_id
         });
     } catch (err) {
-        res.status(500).json(err);
+        res.status(502).json(err);
     }
 });
 
@@ -83,6 +104,18 @@ router.get('/signup', (req, res) => {
         return;
     }
     res.render('signup');
+});
+
+router.get('/posts', (req, res) => {
+    // if user is not logged in redirect to login
+    if (!req.session.logged_in) {
+        res.redirect('/login');
+        return;
+    }
+    res.render('newPost', {
+        logged_in: req.session.logged_in,
+        user_Id: req.session.user_id
+    });
 });
 
 module.exports = router;

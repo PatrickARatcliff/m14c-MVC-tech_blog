@@ -27,12 +27,12 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                     data-parent="#accordionExample">
                     <div class="card-body">
-                        {{post.user.name}} @ {{post.date_created}}
+                        {{post.user.name}}: {{format_date post.date_created}} @ {{format_time post.date_created}}
                     </div>
                     <div>
                         <a class="btn btn-primary mx-3 my-2" href="/" role="button">Make Comment</a>
                     </div>
-                    {{#if comment}}
+                    {{#if comments}}
                     <div>
                         <p>
                             <a class="btn btn-primary mx-3" data-toggle="collapse" href="#collapseExample" role="button"
@@ -46,7 +46,8 @@
                                 <div class="card" style="width: 18rem;">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            <p>{{comment.user_id}}: {{comment.content}}</p>
+                                            <p>{{comment.content}}</p>
+                                            {{!-- <p> {{comment.user.name}}: {{ format_date comment.date_created}} @ {{ format_time comment.date_created}} </p> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -60,9 +61,11 @@
             {{/each}}
         </div>
         <div class="row justify-content-center mt-4">
-            <a class="btn btn-primary" href="/newPost" role="button">Create New Post</a>
+            <a class="btn btn-primary" href="/posts" role="button">Create New Post</a>
         </div>
     </div>
 </div>
 
 <script src="./js/deletePost.js"></script>
+{{!-- <script src="./js/newPost.js"></script>
+<script src="./js/newComment.js"></script> --}}
