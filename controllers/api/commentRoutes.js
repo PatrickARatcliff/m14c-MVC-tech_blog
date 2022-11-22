@@ -5,8 +5,9 @@ const withAuth = require('../../utils/auth');
 
 // http://localhost:3001/api/comment
 router.post('/', withAuth, async (req, res) => {
+  console.log('hello george');
   try {
-
+    console.log(req.body, req.session.user_id, req.body.post_id);
     const newComment = await Comment.create({
       ...req.body,
       user_id: req.session.user_id,

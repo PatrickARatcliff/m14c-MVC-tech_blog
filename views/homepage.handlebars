@@ -14,7 +14,7 @@
 {{!-- {{/each}} --}}
 
 <div class="row">
-    <div class="col-12 post-list">
+    <div class="col-12 post-list ">
         <div class="accordion " id="accordionExample">
             {{#each posts as |post|}}
             <div class="card mt-4">
@@ -51,6 +51,7 @@
                                                 placeholder="blah, blah, blah...">
                                         </div>
                                         <p hidden id="post_id">{{post.id}}</p>
+                                        {{!-- <p>{{post.id}}</p> --}}
                                         <button class="btn btn-primary" type="submit">Submit Comment</button>
                                     </form>
                                 </div>

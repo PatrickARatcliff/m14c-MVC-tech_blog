@@ -1,10 +1,12 @@
 // console.log('debug')
 const newFormHandler = async (event) => {
     event.preventDefault();
-    // console.log('debug')
-    const content = document.querySelector('#new-comment-text').value.trim();
-    const post_id = document.querySelector('#post_id').textContent;
-  
+    
+    const content = event.target[0].value;
+    
+    const post_id = event.target.childNodes[3].innerText;
+    
+  console.log(event.target[0].value)
     if (content) {
       const response = await fetch(`/api/comment`, {
         method: 'POST',
@@ -23,6 +25,6 @@ const newFormHandler = async (event) => {
   };
   
   document
-    .querySelector('.new-comment-form')
+    .querySelector('#accordionExample')
     .addEventListener('submit', newFormHandler);
   
