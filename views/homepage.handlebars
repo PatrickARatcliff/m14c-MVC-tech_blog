@@ -12,14 +12,14 @@
             {{#each posts as |post|}}
             <div class="card mt-4">
                 <div class="card-header row" id="headingOne">
-                    <h2 class="mb-0 col-9">
+                    <h2 class="mb-0 col-9 col-md-10 col-lg-11">
                         <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                             data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             {{post.content}}
                         </button>
                     </h2>
                     {{!-- {{#if belongsToUser}} --}}
-                    <div class="col-2">
+                    <div class="col-1">
                         <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
                     </div>
                     {{!-- {{/if}} --}}
@@ -40,9 +40,10 @@
                                     <form class="form new-comment-form">
                                         <div class="form-group">
                                             <label for="new-comment-text">Enter Comment Text</label>
-                                            <input type="text" class="form-control" id="new-post-text"
+                                            <input type="text" class="form-control" id="new-comment-text"
                                                 placeholder="blah, blah, blah...">
                                         </div>
+                                        <p hidden id="post_id">{{post.id}}</p>
                                         <button class="btn btn-primary" type="submit">Submit Comment</button>
                                     </form>
                                 </div>
@@ -76,7 +77,6 @@
                     {{/if}}
                 </div>
             </div>
-            <p hidden id="post_id">{{post.id}}</p>
             {{/each}}
         </div>
         <div class="row justify-content-center mt-4">
@@ -86,5 +86,5 @@
 </div>
 
 <script src="./js/deletePost.js"></script>
-<script src="./js/newPost.js"></script>
+{{!-- <script src="./js/newPost.js"></script> --}}
 <script src="./js/newComment.js"></script>

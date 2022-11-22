@@ -4,12 +4,12 @@ const makeCommentButtonHandler = async (event) => {
         const id = event.target.getAttribute('data-id');
 
         const response = await fetch(`/api/posts/${id}`, {
-            method: 'DELETE',
+            method: 'POST',
         });
         if (response.ok) {
             document.location.replace('/');
         } else {
-            alert('Not your post!');
+            alert('Failed to create comment!');
         }
     }
 };
