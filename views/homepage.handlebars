@@ -1,11 +1,18 @@
 {{!-- {{#for users as |user|}} --}}
-{{#if logged_in}}
+{{!-- {{#each user as |user|}} --}}
 <div class="row">
+    {{#if logged_in}}
     <div class="col-auto">
         <h4>Welcome!</h4>
     </div>
+    {{else}}
+    <div class="col-auto">
+        <h4>Please Sign-In!</h4>
+    </div>
     {{/if}}
 </div>
+{{!-- {{/each}} --}}
+
 <div class="row">
     <div class="col-12 post-list">
         <div class="accordion " id="accordionExample">
@@ -64,9 +71,9 @@
                                 <div class="card" style="width: 18rem;">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">
-                                            <p>{{comment.content}}</p>
-                                            {{!-- <p> {{comment.user.name}}: {{ format_date comment.date_created}} @ {{
-                                                format_time comment.date_created}} </p> --}}
+                                            <p>{{comment.content}} {{comment.user.name}}</p>
+                                            <p>{{comment.user.name}}</p> 
+                                            {{!-- <p>{{format_date comment.date_created}} @ {{format_time comment.date_created}} </p> --}}
                                         </li>
                                     </ul>
                                 </div>
@@ -86,5 +93,4 @@
 </div>
 
 <script src="./js/deletePost.js"></script>
-{{!-- <script src="./js/newPost.js"></script> --}}
 <script src="./js/newComment.js"></script>

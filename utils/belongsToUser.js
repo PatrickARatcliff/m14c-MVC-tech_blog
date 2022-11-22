@@ -1,5 +1,6 @@
 const belongsToUser = (req) => {
-    return req.session.user_id
+    if (req.session.user_id === post.user_id)
+    { return true; }
   };
   
   module.exports = belongsToUser;

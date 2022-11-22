@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
                 },
                 {
                     model: Comment,
-                    attributes: ['user_id', 'content']
+                    attributes: ['user_id', 'post_id', 'content']
                 },
             ],
         });
@@ -27,15 +27,19 @@ router.get('/', async (req, res) => {
                     model: User,
                     attributes: ['name'],
                 },
+                {
+                    model: Post,
+                    attributes: ['user_id', 'content'],
+                },
             ],
         });
 
         // serialize data so the template can read it
-        const comments = commentData.map((post) => post.get({ plain: true }));
+        const comments = commentData.map((comments) => comments.get({ plain: true }));
         
         // const userData = await User.findOne({
         //     where: {
-        //         _id: req.session.user_Id,
+        //         id: req.session.user_Id,
         //       },
         // });
 
@@ -46,7 +50,7 @@ router.get('/', async (req, res) => {
             comments,
             // user,
             logged_in: req.session.logged_in,
-            userId: req.session.user_id
+            user_Id: req.session.user_id
         });
     } catch (err) {
         res.status(502).json(err);
@@ -103,7 +107,7 @@ router.get('/signup', (req, res) => {
         res.redirect('/');
         return;
     }
-    res.render('signup');
+    res.render('signUp');
 });
 
 router.get('/posts', (req, res) => {
