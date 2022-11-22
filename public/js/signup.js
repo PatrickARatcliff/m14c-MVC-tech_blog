@@ -5,14 +5,14 @@ const signupFormHandler = async (event) => {
   const email = document.querySelector('#email-input').value.trim();
   const password = document.querySelector('#password-input').value.trim();
 
-  // CREATE NEW USER BY POSTING TO API/USERS/signup
-  // if (!name || !email || !password) {
-  //   alert("Please enter valid username (can't be blank), email (xyz@example.com) and password (minimum of eight characters).");
-  //   return;
-  // }
+  // CREATE NEW USER BY POSTING TO API/USERS/
+  if (!name || !email || !password) {
+    alert("Please enter valid username (can't be blank), email (xyz@example.com) and password (minimum of eight characters).");
+    return;
+  }
 
   if (name && email && password) {
-    const response = await fetch('/api/users/signup', {
+    const response = await fetch('/api/users', {
       method: 'POST',
       body: JSON.stringify({ name, email, password }),
       headers: { 'Content-Type': 'application/json' },
@@ -21,10 +21,10 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     }
-    // else {
-    //   alert("Please enter valid username (can't be blank), email (xyz@example.com) and password (minimum of eight characters).");
-    //   return;
-    // }
+    else {
+      alert("Please enter valid username (can't be blank), email (xyz@example.com) and password (minimum of eight characters).");
+      return;
+    }
   }
 };
 
