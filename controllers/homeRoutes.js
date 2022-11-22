@@ -102,7 +102,7 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/signup', (req, res) => {
+router.get('/signUp', (req, res) => {
     if (req.session.logged_In) {
         res.redirect('/');
         return;
